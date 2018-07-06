@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubewatcher
+data:
+  .kubewatcher.yml: |
+    kubernetes:
+      dashboard: https://dashboard.example.com/
+      config_from: cluster
+    handlers:
+      all:
+        messenger: bearychat
+        seconds: 2
+        count: 10
+        options:
+          url: https://hook.bearychat.com/=xxx/incoming/xxx
+          channel: foo
+      warning:
+        messenger: bearychat
+        seconds: 2
+        count: 10
+        options:
+          url: https://hook.bearychat.com/=xxx/incoming/xxx
+          channel: bar
+      deploy:
+        messenger: bearychat
+        seconds: 2
+        count: 10
+        options:
+          url: https://hook.bearychat.com/=xxx/incoming/xxx
+          channel: deploy
+    specs:
+      - handlers:
+          - deploy
+        filters:
+          reasons:
+            - Started
+          regardingKind: Pod
+      - handlers:
+          - warning
+        filters:
+          types:
+            - Warning
+      - handlers:
+          - all

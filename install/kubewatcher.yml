@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kubewatcher
+  namespace: default
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: kubewatcher
+        app: kubewatcher
+    spec:
+      restartPolicy: Always
+      containers:
+      - image: decent/kubewatcher
+        imagePullPolicy: Always
+        name: kubewatcher
+        env:
+          - name: KUBE_WATCHER_FRESH_ONLY
+            value: 'true'
+        volumeMounts:
+          - name: config-volume
+            mountPath: /opt/kubewatcher/config
+      volumes:
+        - name: config-volume
+          configMap:
+            name: kubewatcher

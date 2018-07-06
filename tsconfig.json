@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es2017",
+    "lib": [
+      "es2017"
+    ],
+    "types": [
+      "node",
+      "reflect-metadata"
+    ],
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "skipLibCheck": true,
+    "stripInternal": true,
+    "paths": {
+      "*": [
+        "node_modules/*",
+        "src/@types/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
