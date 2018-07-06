@@ -52,7 +52,7 @@ export default class EventDispatcher {
 
   private dispatch(event: Event) {
     if (!event || !event.object) {
-      console.error(`[${moment().format()}] - Invalid event: ${event}`);
+      console.error(`[${moment().format()}] - Invalid event: ${JSON.stringify(event)}`);
       return;
     }
     let regardingKind: string = event.object.regarding.kind;
