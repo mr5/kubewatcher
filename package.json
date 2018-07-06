@@ -10,7 +10,7 @@
     "build": "rm -rf dist && tsc",
     "start": "node dist/server.js",
     "test": "ava",
-    "lint": "tslint --project ./src/"
+    "lint": "tslint -c tslint.json -p tsconfig.json"
   },
   "ava": {
     "compileEnhancements": false,
