@@ -51,6 +51,10 @@ export default class EventDispatcher {
   }
 
   private dispatch(event: Event) {
+    if (!event || !event.object) {
+      console.error(`[${moment().format()}] - Invalid event: ${event}`);
+      return;
+    }
     let regardingKind: string = event.object.regarding.kind;
     if (process.env.KUBE_WATCHER_FRESH_ONLY
       && this.startedAt.diff(moment(event.object.deprecatedLastTimestamp), 'seconds') > 0) {
