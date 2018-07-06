@@ -1,9 +1,9 @@
-import Event from "./Event";
+import Event from './Event';
 
 export default interface Messenger {
-    send(events: Event[]): Promise<void>;
+  send(events: Event[]): Promise<void>;
 
-    maxMessages(): number;
+  maxMessages(): number;
 
-    name(): string;
+  name(): string;
 }

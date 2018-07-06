@@ -1,7 +1,7 @@
-import {Transform} from 'stream';
+import { Transform } from 'stream';
 
-declare module "json-stream" {
-    export default class JSONStream extends Transform {
+declare module 'json-stream' {
+  export default class JSONStream extends Transform {
 
-    }
+  }
 }

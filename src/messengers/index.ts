@@ -1,6 +1,5 @@
-import Bearychat from "./Bearychat";
+import Bearychat from './Bearychat';
 
 export {
-    Bearychat
-}
-
+  Bearychat
+};

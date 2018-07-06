@@ -9,7 +9,8 @@
     "dev": "nodemon",
     "build": "rm -rf dist && tsc",
     "start": "node dist/server.js",
-    "test": "ava"
+    "test": "ava",
+    "lint": "tslint --project ./src/"
   },
   "ava": {
     "compileEnhancements": false,
@@ -34,6 +35,7 @@
     "tsconfig-paths": "^3.4.2",
     "tslint": "^5.10.0",
     "tslint-config-airbnb": "^5.9.2",
+    "tslint-language-service": "^0.9.9",
     "typescript": "^2.9.2"
   },
   "dependencies": {
