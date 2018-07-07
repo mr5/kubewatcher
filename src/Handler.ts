@@ -9,8 +9,10 @@ export default class Handler {
   private lastSent: moment.Moment;
   private readonly messenger: Messenger;
   private interval: Timer;
+  private lastBreathed: moment.Moment;
 
   constructor(readonly name: string, private options: HandlerOptions) {
+    this.lastBreathed = moment();
     this.options.seconds = parseInt(String(this.options.seconds), 10);
     if (!this.options.seconds) {
       this.options.seconds = 0;
@@ -31,7 +33,25 @@ export default class Handler {
     throw new Error(`Unsupported messenger '${name}'`);
   }
 
+  public getLastBreathed() {
+    return this.lastBreathed;
+  }
+
+  public getLastSent() {
+    return this.lastSent;
+  }
+
+  public getName() {
+    return this.name;
+  }
+
+  public getPendingEventsCount() {
+    return this.events.length;
+  }
+
   private sendMessages() {
+    this.lastBreathed = moment();
+    console.log(`[${this.lastBreathed.format()}] - Handler [${this.name}] breathing...`);
     const maxMessages = this.options.count > 0
       ? Math.min(this.options.count, this.messenger.maxMessages())
       : this.messenger.maxMessages();
@@ -55,6 +75,7 @@ export default class Handler {
     if (!this.lastSent) {
       this.lastSent = moment();
     }
+    this.lastBreathed = moment();
     if (!this.interval) {
       this.interval = setInterval(this.sendMessages.bind(this), 500);
     }

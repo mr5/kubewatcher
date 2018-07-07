@@ -27,6 +27,10 @@ export default class EventDispatcher {
     }
   }
 
+  public getHandlers() {
+    return this.handlers;
+  }
+
   public async start() {
     this.startedAt = moment();
     let clientConfig;
