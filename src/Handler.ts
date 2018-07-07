@@ -22,6 +22,7 @@ export default class Handler {
       this.options.count;
     }
     this.messenger = Handler.messengerFactory(this.options.messenger, this.options.options);
+    this.interval = setInterval(this.sendMessages.bind(this), 1000);
   }
 
   public static messengerFactory(name: string, options: any) {
@@ -74,10 +75,6 @@ export default class Handler {
   public handle(event: Event) {
     if (!this.lastSent) {
       this.lastSent = moment();
-    }
-    this.lastBreathed = moment();
-    if (!this.interval) {
-      this.interval = setInterval(this.sendMessages.bind(this), 500);
     }
     this.events.push(event);
   }
