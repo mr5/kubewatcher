@@ -6,6 +6,10 @@ import moment from 'moment-timezone';
 import express from 'express';
 import Handler from './Handler';
 
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('unhandledRejection:', reason, promise);
+  process.exit(1);
+});
 require('source-map-support/register');
 if (process.env.TZ) {
   moment.tz.setDefault(process.env.TZ);

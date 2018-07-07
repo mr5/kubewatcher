@@ -52,7 +52,6 @@ export default class Handler {
 
   private sendMessages() {
     this.lastBreathed = moment();
-    console.log(`[${this.lastBreathed.format()}] - Handler [${this.name}] breathing...`);
     const maxMessages = this.options.count > 0
       ? Math.min(this.options.count, this.messenger.maxMessages())
       : this.messenger.maxMessages();

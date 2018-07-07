@@ -42,7 +42,7 @@ export default class Bearychat implements Messenger {
         attachments,
         markdown: true,
         channel: this.options.channel,
-        title: 'Kubernetes events'
+        text: 'Kubernetes events'
       }
     };
     await request(requestOptions);

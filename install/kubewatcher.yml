@@ -12,11 +12,14 @@ spec:
         app: kubewatcher
     spec:
       restartPolicy: Always
+      serviceAccount: kubewatcher
       containers:
       - image: decent/kubewatcher
         imagePullPolicy: Always
         name: kubewatcher
         env:
+          - name: TZ
+            value: Asia/Shanghai
           - name: KUBE_WATCHER_FRESH_ONLY
             value: 'true'
         volumeMounts:
