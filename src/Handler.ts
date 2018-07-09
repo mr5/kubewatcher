@@ -28,6 +28,7 @@ export default class Handler {
   public static messengerFactory(name: string, options: any) {
     for (const messenger of Object.values(messengers)) {
       if (name === messenger.prototype.name()) {
+        // @ts-ignore TS2351
         return new messenger(options);
       }
     }
