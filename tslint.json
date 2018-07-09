@@ -33,6 +33,10 @@
     ],
     "no-await-in-loop": [
       0
+    ],
+    "max-line-length": [
+      true,
+      120
     ]
   },
   "rulesDirectory": []

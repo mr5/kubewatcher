@@ -99,9 +99,9 @@ export default class EventDispatcher {
     regardingKind = regardingKind ? regardingKind.toLowerCase() : '';
     const regardingNamespace = event.object.regarding.namespace;
     const regardingName = event.object.regarding.name;
+    const dashPath = `${regardingKind}/${regardingNamespace}/${regardingName}?namespace=${regardingNamespace}`;
     event.kubeWatcher = {
-      dashboard: `${this.options.kubernetes.dashboard}/#!/${regardingKind}/${regardingNamespace}
-      /${regardingName}?namespace=${regardingNamespace}`
+      dashboard: `${this.options.kubernetes.dashboard}/#!/${dashPath}`
     };
     for (const spec of this.options.specs) {
       if (EventDispatcher.filter(spec.filters, event)) {
