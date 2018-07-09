@@ -131,24 +131,16 @@ export default class EventDispatcher {
         throw new Error(`Unknown filter: ${filterKey}`);
       }
       if (filterKeys.includes(filterKey)) {
-        const filterValue = (filters as any)[filterKey];
+        let filterValue = (filters as any)[filterKey];
         const filterEventKey = (filterKeyMapping as any)[filterKey];
         const eventValue = _.get(event.object, filterEventKey);
         if (_.isString(filterValue)) {
-          if (!new RegExp(filterValue).test(eventValue)) {
-            return false;
-          }
-        } else if (_.isArray(filterValue)) {
+          filterValue = [filterValue];
+        }
+        if (_.isArray(filterValue)) {
           for (const v of filterValue) {
-            // negative match
-            if (v && v.startsWith('!')) {
-              if (v === eventValue) {
-                return false;
-              }
-            } else {
-              if (v !== eventValue) {
-                return false;
-              }
+            if (!this.match(v, eventValue)) {
+              return false;
             }
           }
         }
@@ -156,7 +148,23 @@ export default class EventDispatcher {
     }
 
     return !(filters.minCount > 0 && event.object.deprecatedCount < filters.minCount);
+  }
 
+  private static match(expected: string, actual: string) {
+    let negative = false;
+    let expectedValue = expected;
+    let matched = false;
+    if (expectedValue && expectedValue.startsWith('!')) {
+      negative = true;
+      expectedValue = expectedValue.substring(1);
+    }
+
+    if (/^\/(.+)\/$/.test(expectedValue)) {
+      matched = new RegExp(expectedValue).test(actual);
+    } else {
+      matched = expectedValue === actual;
+    }
+    return negative ? !matched : matched;
   }
 }
 
