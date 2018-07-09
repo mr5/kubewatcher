@@ -158,9 +158,9 @@ export default class EventDispatcher {
       negative = true;
       expectedValue = expectedValue.substring(1);
     }
-
-    if (/^\/(.+)\/$/.test(expectedValue)) {
-      matched = new RegExp(expectedValue).test(actual);
+    const expectedValueRegexMatch = /^\/(.+)\/$/.exec(expectedValue);
+    if (expectedValueRegexMatch) {
+      matched = new RegExp(expectedValueRegexMatch[1]).test(actual);
     } else {
       matched = expectedValue === actual;
     }
